@@ -29,6 +29,7 @@
   --warn:#fbbf24; --warn-soft:#3a2c0d; color-scheme:dark}
 
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
   padding:env(safe-area-inset-top,0px) 16px calc(env(safe-area-inset-bottom,0px) + 32px);-webkit-tap-highlight-color:transparent}
@@ -126,7 +127,7 @@ h1{font-family:var(--display);font-weight:400;font-size:1.6rem;margin:0;line-hei
 .toast.show{opacity:1;transform:none}
 
 .wheel{width:200px;max-width:100%}
-.wheel svg{width:100%;height:auto;display:block}
+.wheel svg{width:100%;height:auto;display:block;direction:ltr}
 .wseg{fill:var(--line);transition:fill .12s}
 .wtxt{fill:var(--muted);font:700 12px var(--body);text-anchor:middle;dominant-baseline:central}
 .freebig{font-family:var(--display);font-size:4rem;line-height:1;direction:ltr;min-height:4rem}
@@ -185,7 +186,7 @@ h1,.chordname .big,.freebig,.tile .n,.seq b,.heard .val{font-weight:800}
 .note{font-weight:700;direction:ltr}
 .seg button[aria-pressed="true"]{background:var(--brass);color:#2a0f05}
 .lv[aria-pressed="true"]{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass)}
-.panel{display:flex;flex-direction:column;gap:12px}
+.panel{display:flex;flex-direction:column;gap:14px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
 .cardhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .cardhead h2{margin:0;font-family:var(--display);font-weight:800;font-size:1.25rem}
@@ -240,7 +241,7 @@ h1,.chordname .big,.freebig,.tile .n,.seq b,.heard .val{font-weight:800}
 .jamnow .nm b{font-size:2.6rem;font-weight:800;direction:ltr;line-height:1}
 .jamnow .nm span{font-size:.85rem;color:var(--muted)}
 .seq .empty{border:0;background:none;color:var(--muted);font-size:.85rem}
-.prog{min-height:48px}
+#jProg{min-height:48px;align-items:center}
 .keysheet{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 14px}
 .keysheet summary{list-style:none;display:flex;align-items:baseline;gap:10px;cursor:pointer}
 .keysheet summary::-webkit-details-marker,.how summary::-webkit-details-marker{display:none}
@@ -256,8 +257,78 @@ h1,.chordname .big,.freebig,.tile .n,.seq b,.heard .val{font-weight:800}
 .bpmrow label{white-space:nowrap;font-size:.85rem;color:var(--muted)}
 .pad.flash{animation:flash .5s}
 @keyframes flash{0%{box-shadow:0 0 0 6px var(--good)}100%{box-shadow:0 0 0 0 var(--good)}}
+.listen{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 14px;transition:background .2s,border-color .2s}
+.listen .dot{width:10px;height:10px;border-radius:50%;background:var(--brass);flex:0 0 auto;animation:pulse 1.4s ease-in-out infinite}
+.listen .lk{font-size:.8rem;color:var(--muted);font-weight:700}
+.listen b{font-size:1.6rem;font-weight:800;direction:ltr;min-width:2.5ch}
+.listen .lm{flex:1;font-weight:700;font-size:.9rem}
+.listen .lc{font-weight:800;font-size:.85rem;background:var(--bg);border-radius:999px;padding:3px 10px;font-variant-numeric:tabular-nums}
+.listen.in{background:var(--good-soft);border-color:var(--good)} .listen.in .dot{background:var(--good);animation:none}
+.listen.out{background:var(--warn-soft);border-color:var(--warn)} .listen.out .dot{background:var(--warn);animation:none}
+.pad{position:relative}
+.pad.hear{background:var(--good)!important;color:#fff;transform:scale(1.05);box-shadow:0 6px 18px -6px var(--good)}
+.pad .ok{position:absolute;top:5px;inset-inline-start:7px;font-size:.75rem;font-weight:800;color:var(--good)}
+.pad.hear .ok{color:#fff}
 #confetti{position:fixed;inset:0;pointer-events:none;width:100%;height:100%;z-index:10}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- טאבלט ---------- */
+@media (min-width:700px){
+  .wrap{max-width:780px;gap:16px}
+  h1{font-size:2rem}
+  .roots{grid-template-columns:repeat(12,1fr)}
+  .pads{grid-template-columns:repeat(7,1fr);gap:10px}
+  .pad{padding:18px 4px;border-radius:18px}
+  .pad b{font-size:1.7rem}
+  .ringbox{width:200px;height:200px}
+  .chordname .big{font-size:4.4rem}
+  .diagram{width:220px}
+  .jamnow .diagram{width:240px}
+  .jamnow .nm b{font-size:3.6rem}
+  .target-row{gap:36px}
+  .freebig{font-size:5rem}
+  .wheel{width:240px}
+  .fbWrap svg{width:100%;height:auto}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+  .seg button{padding:11px 4px;font-size:1.05rem}
+}
+@media (min-width:1000px){
+  /* טאבלט לרוחב: שורת כותרת אחת, הכול במסך אחד */
+  .wrap{max-width:1240px;display:grid;grid-template-columns:auto 1fr auto auto;column-gap:14px;row-gap:14px;align-items:center;padding-block:12px}
+  .wrap>*{grid-column:1/-1;min-width:0}
+  header{display:contents}
+  header h1{grid-row:1;grid-column:1;font-size:1.7rem}
+  .wrap>.seg{grid-row:1;grid-column:2;width:100%;max-width:520px;justify-self:center}
+  header .stats{grid-row:1;grid-column:3}
+  #settings{grid-row:1;grid-column:4;position:relative;padding:7px 14px;border-radius:999px;align-self:center}
+  #settings summary{list-style:none;white-space:nowrap;font-size:.9rem}
+  #settings summary::-webkit-details-marker{display:none}
+  #settings .set{position:absolute;top:calc(100% + 8px);inset-inline-end:0;width:340px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 12px 32px -12px rgba(0,0,0,.35);z-index:30;margin:0}
+  .mic{flex-direction:row;align-items:center;padding:10px 14px}
+  .mic p{flex:1}
+  .mic .btn{padding:10px 22px}
+  .keysheet{position:relative}
+  .keysheet .sheet{position:absolute;top:calc(100% + 8px);inset-inline:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 16px 40px -14px rgba(0,0,0,.35);z-index:25;margin:0}
+  #jam{grid-template-areas:"key listen" "pads pads" "seq now" "how how";grid-auto-flow:row}
+  #jam>.keysheet{grid-area:key;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+  #jam:has(#listen[hidden])>.keysheet{grid-column:1/-1}
+  #jam>#listen{grid-area:listen;align-self:stretch}
+  #jam>#pads{grid-area:pads}
+  #jam>#seqCard{grid-area:seq;align-self:stretch}
+  #jam>.jamnow{grid-area:now;align-self:stretch}
+  #jam>.how{grid-area:how}
+  #practice{grid-template-rows:auto 1fr}
+  #practice>.levels{grid-column:2;grid-row:1}
+  #practice>#stage{grid-column:1;grid-row:1/span 2}
+  #practice>#gridSec{grid-column:2;grid-row:2}
+  #free{display:grid;grid-template-columns:1.3fr 1fr;align-items:start}
+  #free>*{min-width:0}
+  #jam,#practice{display:grid;grid-template-columns:1fr 1fr;align-items:start;grid-auto-flow:dense}
+  #jam>*,#practice>*{grid-column:1/-1;min-width:0}
+  #practice>#stage{grid-column:1}
+  #practice>#gridSec{grid-column:2}
+  #free>.stage .target-row{gap:60px}
+}
 </style>
 </head>
 <body>
@@ -287,7 +358,7 @@ h1,.chordname .big,.freebig,.tile .n,.seq b,.heard .val{font-weight:800}
   </div>
 
   <!-- PRACTICE + SHAPES -->
-  <div id="practice" style="display:flex;flex-direction:column;gap:14px">
+  <div id="practice" class="panel">
     <div class="levels" id="levels"></div>
 
     <div class="stage" id="stage">
@@ -347,6 +418,12 @@ h1,.chordname .big,.freebig,.tile .n,.seq b,.heard .val{font-weight:800}
       </div>
     </details>
 
+    <div class="listen" id="listen" hidden>
+      <span class="dot"></span>
+      <b id="lName">—</b>
+      <span class="lm" id="lMsg">נגן אקורד מהסולם</span>
+      <span class="lc" id="lCount">0/7</span>
+    </div>
     <div class="pads" id="pads"></div>
 
     <div class="card jamnow">
@@ -361,9 +438,9 @@ h1,.chordname .big,.freebig,.tile .n,.seq b,.heard .val{font-weight:800}
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" id="seqCard">
       <div class="cardhead"><h2>הרצף שלי</h2><button class="chip" id="jRec" aria-pressed="true">● מקליט</button></div>
-      <div class="seq prog" id="jProg"></div>
+      <div class="seq" id="jProg"></div>
       <div class="actions">
         <button class="btn brass" id="jPlay">▶ נגן</button>
         <button class="btn ghost" id="jUndo">מחק</button>
@@ -382,7 +459,7 @@ h1,.chordname .big,.freebig,.tile .n,.seq b,.heard .val{font-weight:800}
   </div>
 
   <!-- FREE -->
-  <div id="free" style="display:none;flex-direction:column;gap:14px">
+  <div id="free" class="panel" style="display:none">
     <div class="stage">
       <div class="eyebrow">נגן מה שבא לך</div>
       <div class="freebig" id="fName">—</div>
@@ -409,8 +486,8 @@ h1,.chordname .big,.freebig,.tile .n,.seq b,.heard .val{font-weight:800}
     </section>
   </div>
 
-  <details>
-    <summary>הגדרות</summary>
+  <details id="settings">
+    <summary>⚙ הגדרות</summary>
     <div class="set">
       <label for="sens">רגישות מיקרופון</label>
       <input type="range" id="sens" min="1" max="10" value="6">
@@ -648,7 +725,7 @@ function playScale(){
 }
 
 /* ---------- scale tab (jam) ---------- */
-let jam={cur:0,shape:0,playK:-1,timer:null,beat:0,last:'',hearC:'',hearSince:0,quietSince:0};
+let jam={cur:0,shape:0,playK:-1,timer:null,beat:0,last:'',hearC:'',hearSince:0,quietSince:0,played:new Set(),playedKey:''};
 function jamFingRoot(){ return rootFor((parse(S.kRoot).root-S.capo+12)%12,S.kType); }
 function jamChords(){ const snd=scaleChords(S.kRoot,S.kType), fg=scaleChords(jamFingRoot(),S.kType); return snd.map((c,i)=>({...c,fing:fg[i].name,fn:FUNC[i]})); }
 function bestCapo(){
@@ -666,8 +743,9 @@ function renderJam(){
   const b=bestCapo(); $('#capoBest').dataset.c=b;
   $('#capoBest').textContent = b===S.capo ? '✓ הכי נוח' : (b===0?'נוח יותר: בלי קאפו':`נוח יותר: קאפו ${b}`);
   $('#capoBest').classList.toggle('accent',b!==S.capo);
-  const ch=jamChords();
-  $('#pads').innerHTML=ch.map((c,i)=>`<button class="pad ${c.fn}${jam.cur===i?' on':''}" data-d="${i}"><small>${c.rn}</small><b>${c.name}</b>${S.capo?`<span>צורת ${c.fing}</span>`:''}</button>`).join('');
+  const ch=jamChords(), kk=S.kRoot+S.kType; if(jam.playedKey!==kk){ jam.played=new Set(); jam.playedKey=kk; }
+  $('#listen').hidden=!running; renderCount();
+  $('#pads').innerHTML=ch.map((c,i)=>`<button class="pad ${c.fn}${jam.cur===i?' on':''}" data-d="${i}">${jam.played.has(i)?'<span class="ok">✓</span>':''}<small>${c.rn}</small><b>${c.name}</b>${S.capo?`<span>צורת ${c.fing}</span>`:''}</button>`).join('');
   $('#jRec').setAttribute('aria-pressed',S.jRec); $('#jRec').textContent=S.jRec?'● מקליט':'○ לא מקליט';
   $('#bpm').value=S.bpm; $('#bpmVal').textContent=S.bpm;
   renderProg(); renderJamNow(); renderHow();
@@ -707,19 +785,29 @@ function jamStart(){
     jam.beat++; };
   tickBeat(); jam.timer=setInterval(tickBeat,60000/S.bpm); $('#jPlay').textContent='■ עצור';
 }
-// מיקרופון: מדליק את האקורד שמנוגן, ובמצב הקלטה מוסיף אותו לרצף
+function renderCount(){ $('#lCount').textContent=`ניגנת ${jam.played.size}/7`; }
+// מיקרופון: מציג את האקורד שמנוגן, מסמן אותו בסולם, ובמצב הקלטה מוסיף לרצף
 function jamStep(A,sounding,now){
   if(now-lastUi<100) return; lastUi=now;
-  const ch=jamChords();
-  const top=A&&sounding&&A.res[0].s>0.8 ? canon(A.res[0].name) : '';
+  const ch=jamChords(), bar=$('#listen');
+  const top=A&&sounding&&A.res[0].s>0.78 ? canon(A.res[0].name) : '';
   const d=top ? ch.findIndex(c=>canon(c.name)===top) : -1;
   document.querySelectorAll('#pads .pad').forEach(p=>p.classList.toggle('hear',+p.dataset.d===d));
+  bar.classList.toggle('in',d>=0); bar.classList.toggle('out',!!top&&d<0);
+  if(top){
+    $('#lName').textContent = d>=0 ? ch[d].name : pretty(A.res[0].name);
+    $('#lMsg').textContent = d>=0 ? `בסולם · ${ch[d].rn}` : `לא בסולם ${S.kRoot}`;
+  } else if(!sounding){ $('#lName').textContent='—'; $('#lMsg').textContent=`נגן אקורד מ-${S.kRoot} ${SCALES[S.kType].he}`; }
   if(!sounding){ if(!jam.quietSince) jam.quietSince=now; if(now-jam.quietSince>900) jam.last=''; jam.hearC=''; return; }
   jam.quietSince=0;
   if(d<0){ jam.hearC=''; return; }
   if(top!==jam.hearC){ jam.hearC=top; jam.hearSince=now; return; }
   if(now-jam.hearSince>550 && top!==jam.last){
-    jam.last=top; jam.cur=d; jam.shape=0; markPads(); flashPad(d); renderJamNow(); addToProg(d);
+    jam.last=top; jam.cur=d; jam.shape=0;
+    const fresh=!jam.played.has(d); jam.played.add(d);
+    if(fresh){ const p=document.querySelector(`#pads .pad[data-d="${d}"]`); if(p&&!p.querySelector('.ok')) p.insertAdjacentHTML('afterbegin','<span class="ok">✓</span>'); renderCount();
+      if(jam.played.size===7){ chime(true); confetti(140); } else chime(false); }
+    markPads(); flashPad(d); renderJamNow(); addToProg(d);
   }
 }
 
@@ -824,7 +912,7 @@ async function startMic(){
     src.connect(hp); hp.connect(analyser);
     fbuf=new Float32Array(analyser.frequencyBinCount); tbuf=new Float32Array(analyser.fftSize);
     buildBins();
-    running=true; $('#micBox').hidden=true;
+    running=true; $('#micBox').hidden=true; $('#listen').hidden=false;
     try{ navigator.wakeLock && navigator.wakeLock.request('screen').catch(()=>{}); }catch(e){}
     startCalib(); lastT=performance.now(); requestAnimationFrame(tick);
   }catch(e){
@@ -997,7 +1085,7 @@ function confetti(n){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const cs=getComputedStyle(document.documentElement), cols=['--brass','--good','--warn','--ink'].map(v=>cs.getPropertyValue(v).trim());
   cv.width=innerWidth*devicePixelRatio; cv.height=innerHeight*devicePixelRatio;
-  const r=$('#stage').getBoundingClientRect(), ox=r.left+r.width/2, oy=r.top+90;
+  const r=(mode==='jam'?$('#pads'):$('#stage')).getBoundingClientRect(), ox=r.left+r.width/2, oy=r.top+(mode==='jam'?40:90);
   for(let i=0;i<n;i++){ const a=Math.random()*Math.PI*2,v=4+Math.random()*7;
     parts.push({x:ox,y:oy,vx:Math.cos(a)*v,vy:Math.sin(a)*v-4,r:Math.random()*6.28,vr:(Math.random()-.5)*.4,c:cols[i%4],w:5+Math.random()*5,life:0}); }
   if(!confRun){ confRun=true; requestAnimationFrame(confStep); }
@@ -1016,9 +1104,9 @@ function setMode(m){
   $('#mPractice').setAttribute('aria-pressed',m==='practice');
   $('#mFree').setAttribute('aria-pressed',m==='free');
   $('#mJam').setAttribute('aria-pressed',m==='jam');
-  $('#practice').style.display=(m==='free'||m==='jam')?'none':'flex';
-  $('#free').style.display=m==='free'?'flex':'none';
-  $('#jam').style.display=m==='jam'?'flex':'none';
+  $('#practice').style.display=(m==='free'||m==='jam')?'none':'';
+  $('#free').style.display=m==='free'?'':'none';
+  $('#jam').style.display=m==='jam'?'':'none';
   if(m!=='jam'&&jam.timer) jamStop();
   $('#skipBtn').textContent = m==='family' ? 'דלג לאקורד הבא' : 'האקורד הבא';
   resetRun();
