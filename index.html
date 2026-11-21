@@ -11,27 +11,21 @@
 /* Layout: one narrow column, phone-first. The chord is the stage; status is told by color, not words.
    Palette: deep ink, coral for "your turn", mint for "got it", amber for "almost". */
 :root{
-  --bg:#f4f3fa; --surface:#ffffff; --ink:#1d1b33; --muted:#6e6a86; --line:#e4e2f0;
-  --brass:#ff6b3d; --brass-soft:#ffe8df;
-  --good:#12b76a; --good-soft:#d4f6e5;
-  --warn:#f59e0b; --warn-soft:#fff2d6;
+  /* במה: רקע כהה וחם, אור זהב לתור שלך, ירוק זוהר להצלחה, צוואר עץ לתרשימים */
+  --bg:#0e1016; --surface:#171a23; --surface2:#1f2330; --ink:#f3f1ea; --muted:#8f93a3; --line:#2a2e3c;
+  --brass:#ffb547; --brass-soft:#3a2c14;
+  --good:#3ee08f; --good-soft:#12382a;
+  --warn:#ff8a5c; --warn-soft:#3d2018;
+  --wood:#3a2318; --fret:#b9bcc6; --string:#e6dfcd; --pearl:#ece5d6; --on-accent:#221503;
   --display:"Rubik",system-ui,sans-serif;
   --body:"Rubik",system-ui,-apple-system,"Segoe UI",sans-serif;
-  color-scheme:light;
+  color-scheme:dark;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#13121f; --surface:#1d1b2e; --ink:#f2f1fa; --muted:#a19dbb; --line:#2f2c46;
-  --brass:#ff8a5f; --brass-soft:#3b2219; --good:#3ddc97; --good-soft:#10362a;
-  --warn:#fbbf24; --warn-soft:#3a2c0d; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#13121f; --surface:#1d1b2e; --ink:#f2f1fa; --muted:#a19dbb; --line:#2f2c46;
-  --brass:#ff8a5f; --brass-soft:#3b2219; --good:#3ddc97; --good-soft:#10362a;
-  --warn:#fbbf24; --warn-soft:#3a2c0d; color-scheme:dark}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
+body{background:radial-gradient(1100px 520px at 75% -12%,#222842 0%,transparent 62%),radial-gradient(900px 500px at 0% 110%,#2a1a10 0%,transparent 60%),var(--bg);background-attachment:fixed;min-height:100vh;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
   padding:env(safe-area-inset-top,0px) 16px calc(env(safe-area-inset-bottom,0px) + 32px);-webkit-tap-highlight-color:transparent}
 .wrap{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:14px;padding-block:14px}
 button{font:inherit;color:inherit;cursor:pointer}
@@ -272,6 +266,91 @@ h1,.chordname .big,.freebig,.tile .n,.seq b,.heard .val{font-weight:800}
 #confetti{position:fixed;inset:0;pointer-events:none;width:100%;height:100%;z-index:10}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* ---------- סקין "במה" ---------- */
+h1{display:flex;align-items:center;gap:10px;letter-spacing:-.01em}
+h1 .pick{width:30px;height:34px;flex:0 0 auto;filter:drop-shadow(0 4px 10px rgba(255,181,71,.45))}
+.card,.stage,.keysheet,.listen,#settings,.seg,.tile,.lv,.rchip,.chip,.btn.ghost,.deg,.capo .stp button,.shapenav button,.seq button,.seq span{box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+.stage,.card,.keysheet{background:linear-gradient(180deg,#1a1e29,#151821)}
+.seg{background:#12151d}
+.seg button[aria-pressed="true"],.btn.brass,.rchip[aria-pressed="true"],.chip.accent{background:linear-gradient(180deg,#ffcb72,#ff9f2e);color:var(--on-accent);border-color:transparent;box-shadow:0 8px 22px -10px rgba(255,165,50,.75)}
+.mic{background:linear-gradient(90deg,rgba(255,181,71,.14),rgba(255,181,71,.04));border-color:rgba(255,181,71,.35)}
+.lv[aria-pressed="true"],.tile.cur,.deg.cur{border-color:var(--brass);background:var(--brass-soft)}
+.heard{background:var(--surface2)}
+.note{border-color:var(--line);background:transparent}
+.toast{color:#05210f}
+.ring-bg{stroke:rgba(255,255,255,.07)}
+.ring-fg{filter:drop-shadow(0 0 7px rgba(62,224,143,.65))}
+.prog i{box-shadow:0 0 12px rgba(62,224,143,.6)}
+.chordname .big,.jamnow .nm b,.freebig{text-shadow:0 2px 24px rgba(255,181,71,.18)}
+/* כפתורי אקורדים זוהרים */
+.pad{color:#fff;border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 12px 26px -16px rgba(0,0,0,.9)}
+.pad.home{background:linear-gradient(160deg,#23946a,#114a37)}
+.pad.move{background:linear-gradient(160deg,#d0812f,#7a4214)}
+.pad.tension{background:linear-gradient(160deg,#bf4b72,#69213f)}
+.pad small{opacity:.85}
+.pad span{opacity:.9}
+.pad.on{box-shadow:0 0 0 3px #fff,0 0 30px -4px rgba(255,255,255,.5)}
+.pad.hear{background:linear-gradient(160deg,#5ff5ab,#1fae6c)!important;color:#04210f;box-shadow:0 0 0 3px #c4ffe0,0 0 40px rgba(62,224,143,.75)}
+.pad .ok{color:#c4ffe0}
+.pad.hear .ok{color:#04210f}
+/* תרשים אצבוע: צוואר עץ */
+.dg-wood{fill:var(--wood)}
+.dg-str{stroke:var(--string)}
+.dg-fl{stroke:var(--fret);stroke-width:1.8}
+.dg-nut{stroke:var(--pearl);stroke-width:6}
+.dg-dot{fill:var(--brass)}
+.dg-root{fill:var(--good)}
+.dg-num{fill:var(--on-accent)}
+.dg-top{stroke:var(--ink)}
+.dg-fr{fill:var(--ink)}
+/* צוואר הסולם */
+.fb-wood{fill:var(--wood)}
+.fb-str{stroke:var(--string);stroke-width:1.2}
+.fb-fret{stroke:var(--fret);stroke-width:1.6}
+.fb-nut{stroke:var(--pearl);stroke-width:5}
+.fb-inlay{fill:var(--pearl);opacity:.45}
+.fb-n{fill:#2b3142;stroke:rgba(255,255,255,.25);stroke-width:1}
+.fb-t{fill:var(--ink)}
+.fb-root{fill:var(--brass)}
+.fb-t.r{fill:var(--on-accent)}
+
+/* ---------- שכבת משחק ---------- */
+.stat{display:inline-flex;align-items:center;gap:6px}
+.lvl b{display:grid;place-items:center;min-width:26px;height:26px;border-radius:50%;background:linear-gradient(180deg,#ffcb72,#ff9f2e);color:var(--on-accent);font-size:.9rem}
+.lvl .lvt{color:var(--ink);font-weight:700}
+.lvl .xp{width:70px;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.lvl .xp i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffcb72,#ff9f2e);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.combo svg{width:15px;height:15px;fill:var(--muted);transition:fill .2s}
+.combo b{font-variant-numeric:tabular-nums}
+.combo.hot{background:linear-gradient(180deg,#ffcb72,#ff9f2e);border-color:transparent;color:var(--on-accent)}
+.combo.hot b{color:var(--on-accent)} .combo.hot svg{fill:#b8360f}
+.combo.fire{animation:flick .9s ease-in-out infinite;box-shadow:0 0 22px rgba(255,140,40,.7)}
+.combo.bump{animation:bump .35s}
+@keyframes flick{50%{box-shadow:0 0 34px rgba(255,90,30,.9)}}
+@keyframes bump{40%{transform:scale(1.25)}}
+.ringbox.pop{animation:pop .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{35%{transform:scale(1.13)}100%{transform:scale(1)}}
+.float{direction:ltr;position:absolute;top:38%;inset-inline:0;text-align:center;font-weight:800;font-size:2.4rem;color:var(--good);text-shadow:0 0 20px rgba(62,224,143,.7);pointer-events:none;opacity:0;z-index:3}
+.float.go{animation:floatup 1s ease-out}
+@keyframes floatup{0%{opacity:0;transform:translateY(10px) scale(.8)}20%{opacity:1;transform:translateY(0) scale(1.1)}100%{opacity:0;transform:translateY(-70px) scale(1)}}
+.chhud{display:flex;align-items:center;gap:12px;width:100%}
+.chT{font-size:2rem;font-weight:800;min-width:2ch;font-variant-numeric:tabular-nums;color:var(--brass)}
+.chhud.low .chT{color:var(--warn);animation:bump .5s infinite}
+.chbar{flex:1;height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.chbar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ffcb72,#ff9f2e);transition:width .2s linear}
+.chhud.low .chbar i{background:var(--warn)}
+.chS{font-weight:700;color:var(--muted)} .chS b{color:var(--ink);font-size:1.4rem}
+.stage.ch{border-color:var(--brass);box-shadow:0 0 0 1px var(--brass),0 0 40px -10px rgba(255,181,71,.5)}
+#chBtn svg,.actions .btn svg{width:18px;height:18px;fill:currentColor}
+.overlay{position:fixed;inset:0;z-index:40;display:grid;place-items:center;background:rgba(6,8,12,.72);backdrop-filter:blur(6px);padding:16px}
+.ocard{background:linear-gradient(180deg,#20263a,#161a25);border:1px solid var(--line);border-radius:28px;padding:28px 32px;text-align:center;min-width:min(420px,100%);box-shadow:0 30px 80px -20px rgba(0,0,0,.8);animation:pop .5s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;gap:8px}
+.obadge{margin:0 auto;font-weight:800;font-size:.85rem;color:var(--on-accent);background:linear-gradient(180deg,#ffcb72,#ff9f2e);border-radius:999px;padding:4px 14px}
+.obadge:empty{display:none}
+.obig{font-size:5rem;font-weight:800;line-height:1;color:var(--brass);text-shadow:0 0 40px rgba(255,181,71,.45)}
+.otitle{font-size:1.5rem;font-weight:800}
+.osub{color:var(--muted)}
+.ocard .actions{margin-top:12px}
+
 /* ---------- טאבלט ---------- */
 @media (min-width:700px){
   .wrap{max-width:780px;gap:16px}
@@ -333,12 +412,21 @@ h1,.chordname .big,.freebig,.tile .n,.seq b,.heard .val{font-weight:800}
 </head>
 <body>
 <canvas id="confetti"></canvas>
+<div class="overlay" id="over" hidden>
+  <div class="ocard">
+    <div class="obadge" id="oBadge"></div>
+    <div class="obig" id="oBig"></div>
+    <div class="otitle" id="oTitle"></div>
+    <div class="osub" id="oSub"></div>
+    <div class="actions"><button class="btn brass" id="oAgain">שוב!</button><button class="btn ghost" id="oClose">המשך</button></div>
+  </div>
+</div>
 <div class="wrap">
   <header>
-    <h1>מאמן אקורדים</h1>
+    <h1><svg class="pick" viewBox="0 0 30 34" aria-hidden="true"><defs><linearGradient id="pk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffcb72"/><stop offset="1" stop-color="#ff8a2e"/></linearGradient></defs><path d="M15 33C9 27 1 17 1 9 1 4 7 1 15 1s14 3 14 8c0 8-8 18-14 24z" fill="url(#pk)"/></svg>מאמן אקורדים</h1>
     <div class="stats">
-      <span class="stat" id="stPts"><b>0</b> נק׳</span>
-      <span class="stat" id="stStreak">רצף <b>0</b></span>
+      <span class="stat lvl" id="stLvl" title="נקודות"><b id="lvN">1</b><span class="lvt" id="lvT">מתחיל</span><span class="xp"><i id="xpBar"></i></span></span>
+      <span class="stat combo" id="stStreak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-6 1-9.5z"/></svg><b>x0</b></span>
     </div>
   </header>
 
@@ -363,6 +451,12 @@ h1,.chordname .big,.freebig,.tile .n,.seq b,.heard .val{font-weight:800}
 
     <div class="stage" id="stage">
       <div class="toast" id="toast"></div>
+      <div class="float" id="flt"></div>
+      <div class="chhud" id="chHud" hidden>
+        <span class="chT" id="chT">60</span>
+        <div class="chbar"><i id="chBar"></i></div>
+        <span class="chS"><b id="chS">0</b> אקורדים</span>
+      </div>
       <div class="eyebrow" id="tEyebrow">נגן את האקורד</div>
       <div class="dots" id="tDots" hidden></div>
       <div class="target-row">
@@ -389,6 +483,7 @@ h1,.chordname .big,.freebig,.tile .n,.seq b,.heard .val{font-weight:800}
       <div class="actions">
         <button class="btn ghost" id="playBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4z"/></svg>השמע לי</button>
         <button class="btn ghost" id="skipBtn">האקורד הבא</button>
+        <button class="btn brass" id="chBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>אתגר 60 שניות</button>
       </div>
     </div>
 
@@ -542,7 +637,7 @@ const CONFIG = {
     'Fmaj7':'פה בלי ברה. מיתר 1 פתוח.', 'Dsus4':'כמו D, ואצבע 4 על מיתר 1 בסריג 3.',
     'Asus2':'כמו A, משחררים את מיתר 2.', 'Em7':'כמו Em, ומוסיפים אצבע 4 על מיתר 2 בסריג 3.'
   },
-  praise: ['מעולה!','נקי!','בול!','יפה מאוד!','איזה צליל!','בדיוק ככה!']
+  praise: ['מעולה!','נקי!','בול!','יפה מאוד!','איזה צליל!','בדיוק ככה!','שורקת!','אש!']
 };
 /* ======================================================== */
 
@@ -634,7 +729,7 @@ function shapeTip(name,sh,idx){
 
 /* ---------- storage ---------- */
 const KEY='chordCoach.v1';
-let S={level:0,target:'Em',done:{},points:0,sens:6,hold:CONFIG.holdMs,kRoot:'G',kType:'major',capo:0,bpm:90,prog:[0,4,5,3],jRec:true};
+let S={level:0,target:'Em',done:{},points:0,best60:0,sens:6,hold:CONFIG.holdMs,kRoot:'G',kType:'major',capo:0,bpm:90,prog:[0,4,5,3],jRec:true};
 try{const raw=localStorage.getItem(KEY); if(raw) Object.assign(S,JSON.parse(raw));}catch(e){}
 if(!S.done) S.done={};
 if(!S.kRoot){ S.kRoot=S.jRoot||'G'; S.kType=S.jType||'major'; }
@@ -654,10 +749,12 @@ function diagram(name,sh,miss=[]){
   const x0=20,dx=21,y0=30,dy=rows>4?23:28,X=i=>x0+i*dx,Y=f=>y0+(f-base+.5)*dy,H=y0+rows*dy+22;
   const rootPc=parse(name).root;
   let g=`<svg viewBox="0 0 160 ${H}" role="img" aria-label="תרשים ${name}">`;
-  for(let i=0;i<6;i++) g+=`<line class="dg-line${miss.includes(i)?' miss':''}" x1="${X(i)}" y1="${y0}" x2="${X(i)}" y2="${y0+rows*dy}"/>`;
-  for(let f=1;f<=rows;f++) g+=`<line class="dg-line" x1="${X(0)}" y1="${y0+f*dy}" x2="${X(5)}" y2="${y0+f*dy}"/>`;
-  if(base===1) g+=`<line class="dg-nut" x1="${X(0)-1}" y1="${y0}" x2="${X(5)+1}" y2="${y0}"/>`;
-  else { g+=`<line class="dg-line" x1="${X(0)}" y1="${y0}" x2="${X(5)}" y2="${y0}"/>`; g+=`<text class="dg-fr" x="${X(5)+9}" y="${Y(base)}">${base}fr</text>`; }
+  g+=`<rect class="dg-wood" x="${X(0)-9}" y="${y0}" width="${X(5)-X(0)+18}" height="${rows*dy}" rx="3"/>`;
+  for(let f=1;f<=rows;f++) g+=`<line class="dg-line dg-fl" x1="${X(0)-9}" y1="${y0+f*dy}" x2="${X(5)+9}" y2="${y0+f*dy}"/>`;
+  const SW=[2.3,2,1.7,1.4,1.15,.95];
+  for(let i=0;i<6;i++) g+=`<line class="dg-line dg-str${miss.includes(i)?' miss':''}" style="stroke-width:${SW[i]}" x1="${X(i)}" y1="${y0}" x2="${X(i)}" y2="${y0+rows*dy}"/>`;
+  if(base===1) g+=`<line class="dg-nut" x1="${X(0)-9}" y1="${y0}" x2="${X(5)+9}" y2="${y0}"/>`;
+  else { g+=`<line class="dg-line dg-fl" x1="${X(0)-9}" y1="${y0}" x2="${X(5)+9}" y2="${y0}"/>`; g+=`<text class="dg-fr" x="${X(5)+13}" y="${Y(base)}">${base}fr</text>`; }
   if(sh.barre){ const y=Y(sh.barre.fret); g+=`<rect class="dg-dot" x="${X(sh.barre.from)-9}" y="${y-9}" width="${X(sh.barre.to)-X(sh.barre.from)+18}" height="18" rx="9"/>`; }
   for(let i=0;i<6;i++){
     const f=fr[i], fin=sh.fingers[i], m=miss.includes(i)?' miss':'';
@@ -706,6 +803,7 @@ function renderFamily(){}
 function fretboard(notes,rootPc){
   const F=12,x0=24,dx=38,y0=14,dy=21,W=x0+dx*F+12,H=y0+dy*5+24, names=new Map(notes.map(n=>[n.pc,n.name]));
   let g=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="צלילי הסולם על הצוואר">`;
+  g+=`<rect class="fb-wood" x="${x0}" y="${y0-7}" width="${F*dx}" height="${5*dy+14}" rx="3"/>`;
   [3,5,7,9].forEach(f=>g+=`<circle class="fb-inlay" cx="${x0+(f-.5)*dx}" cy="${y0+2.5*dy}" r="4"/>`);
   g+=`<circle class="fb-inlay" cx="${x0+11.5*dx}" cy="${y0+1.5*dy}" r="4"/><circle class="fb-inlay" cx="${x0+11.5*dx}" cy="${y0+3.5*dy}" r="4"/>`;
   for(let f=0;f<=F;f++){ const x=x0+f*dx; g+=`<line class="${f===0?'fb-nut':'fb-fret'}" x1="${x}" y1="${y0}" x2="${x}" y2="${y0+5*dy}"/>`; }
@@ -812,10 +910,30 @@ function jamStep(A,sounding,now){
 }
 
 /* ---------- UI render ---------- */
+const TITLES=['מתחיל','נגן מרפסת','נגן מדורה','נגן רחוב','נגן בר','נגן במה','נגן פסטיבל','כוכב רוק','אגדה'];
+function lvlStart(n){ return 50*n*(n-1); }          // רמה 1: 0, רמה 2: 100, רמה 3: 300…
+function lvlOf(pts){ let n=1; while(pts>=lvlStart(n+1)) n++; return n; }
+function titleOf(n){ return TITLES[Math.min(n-1,TITLES.length-1)]; }
 function renderStats(){
-  $('#stPts').innerHTML=`<b>${S.points}</b> נק׳`;
-  $('#stStreak').innerHTML=`רצף <b>${streak}</b>`;
-  $('#stStreak').classList.toggle('hot',streak>=3);
+  const n=lvlOf(S.points), a=lvlStart(n), b=lvlStart(n+1);
+  $('#lvN').textContent=n; $('#lvT').textContent=titleOf(n);
+  $('#xpBar').style.width=Math.round((S.points-a)/(b-a)*100)+'%';
+  $('#stLvl').title=`${S.points} נקודות · עוד ${b-S.points} לרמה ${n+1}`;
+  const c=$('#stStreak'); c.querySelector('b').textContent='x'+streak;
+  c.classList.toggle('hot',streak>=3); c.classList.toggle('fire',streak>=10);
+  if(S.lvlSeen==null){ S.lvlSeen=n; save(); }
+  if(n>S.lvlSeen){ S.lvlSeen=n; save(); levelUp(n); }
+}
+function bumpCombo(){ const c=$('#stStreak'); c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump'); }
+function floatPts(t){ const f=$('#flt'); f.textContent=t; f.classList.remove('go'); void f.offsetWidth; f.classList.add('go'); }
+function popRing(){ const r=document.querySelector('.ringbox'); r.classList.remove('pop'); void r.offsetWidth; r.classList.add('pop'); }
+function showOver({badge='',big,title,sub,again}){
+  $('#oBadge').textContent=badge; $('#oBig').textContent=big; $('#oTitle').textContent=title; $('#oSub').textContent=sub;
+  $('#oAgain').hidden=!again; $('#over').hidden=false;
+}
+function levelUp(n){
+  if(ch60.on){ ch60.lvl=n; return; }
+  setTimeout(()=>{ if(ch60.on) return; showOver({badge:'עלית רמה!',big:n,title:titleOf(n),sub:`עוד ${lvlStart(n+1)-S.points} נקודות לרמה ${n+1}`}); fanfare(); confetti(220); },900);
 }
 function renderLevels(){
   $('#levels').innerHTML=CONFIG.levels.map((l,i)=>{
@@ -1012,14 +1130,16 @@ function success(){
   if(mode==='family') return famSuccess();
   const c=S.target, i=shapeIdx, sh=curShape(), was=isDone(c,i), t=Math.round(activeMs);
   markDone(c,i); const full=!was&&chordFull(c);
-  streak++; const gain=(was?5:12)+Math.min(20,(streak-1)*2)+(full?20:0); S.points+=gain; save();
-  winFx();
+  streak++; let gain=(was?5:12)+Math.min(20,(streak-1)*2)+(full?20:0);
+  if(ch60.on){ gain+=5; ch60.score++; $('#chS').textContent=ch60.score; }
+  S.points+=gain; save();
+  winFx(); popRing(); floatPts('+'+gain); bumpCombo();
   let text = full ? `שלטת ב-${c} בכל הצורות!` : was ? CONFIG.praise[Math.floor(Math.random()*CONFIG.praise.length)] : `${c} ✓ צורה חדשה`;
   toast(`${text} +${gain}`);
   msg(`${(t/1000).toFixed(1)} ש׳`,'good');
-  chime(full); confetti(full?160:(was?40:80));
+  chime(full,Math.min(streak-1,12)); confetti(full?160:(ch60.on?25:(was?40:80)));
   renderStats(); renderLevels(); renderGrid();
-  setTimeout(()=>{ $('#stage').classList.remove('win'); nextTarget(); msg('מקשיב. נגן את האקורד.'); },1400);
+  setTimeout(()=>{ $('#stage').classList.remove('win'); nextTarget(); msg('מקשיב…'); }, ch60.on?650:1400);
 }
 function famSuccess(){
   if(fam.preview){ const c=fam.preview; streak++; S.points+=8; save(); winFx(); toast(`${c} ✓ +8`); chime(false); confetti(35); renderStats();
@@ -1069,10 +1189,11 @@ function strum(sh,capo=0,vol=1){
   for(let i=0;i<6;i++){ if(sh.frets[i]<0) continue; pluck(440*Math.pow(2,(OPEN[i]+sh.frets[i]+capo-69)/12),t0+k*.035,.22*vol); k++; }
   mutedUntil=performance.now()+2600; hold=0; setRing(0);
 }
-function chime(big){
-  try{ ensureCtx(); const t=ctx.currentTime;
+function fanfare(){ chime(true,0); setTimeout(()=>chime(true,5),260); setTimeout(()=>chime(true,12),520); }
+function chime(big,semis=0){
+  try{ ensureCtx(); const t=ctx.currentTime, k=Math.pow(2,semis/12);
     (big?[784,988,1175,1568]:[880,1109]).forEach((f,i)=>{
-      const o=ctx.createOscillator(),g=ctx.createGain(); o.type='sine'; o.frequency.value=f;
+      const o=ctx.createOscillator(),g=ctx.createGain(); o.type='sine'; o.frequency.value=f*k;
       g.gain.setValueAtTime(0,t+i*.09); g.gain.linearRampToValueAtTime(.16,t+i*.09+.01); g.gain.exponentialRampToValueAtTime(.0001,t+i*.09+.6);
       o.connect(g); g.connect(ctx.destination); o.start(t+i*.09); o.stop(t+i*.09+.65);
     });
@@ -1098,8 +1219,38 @@ function confStep(){
   if(parts.length) requestAnimationFrame(confStep); else { confRun=false; cx.clearRect(0,0,cv.width,cv.height); }
 }
 
+/* ---------- אתגר 60 שניות ---------- */
+let ch60={on:false,end:0,score:0,timer:null};
+async function startChallenge(){
+  $('#over').hidden=true;
+  if(!running){ await startMic(); if(!running) return; }
+  if(mode!=='practice') setMode('practice');
+  ch60={on:true,end:performance.now()+60000,score:0,timer:null};
+  streak=0; renderStats(); $('#chS').textContent='0';
+  $('#chHud').hidden=false; $('#stage').classList.add('ch'); $('#chBtn').hidden=true;
+  nextTarget(); msg('יאללה!','good');
+  ch60.timer=setInterval(()=>{
+    const left=Math.max(0,ch60.end-performance.now()), sec=Math.ceil(left/1000);
+    $('#chT').textContent=sec; $('#chBar').style.width=(left/600)+'%';
+    $('#chHud').classList.toggle('low',sec<=10);
+    if(left<=0) endChallenge(true);
+  },200);
+}
+function endChallenge(show){
+  if(!ch60.on) return;
+  ch60.on=false; clearInterval(ch60.timer);
+  $('#chHud').hidden=true; $('#chHud').classList.remove('low'); $('#stage').classList.remove('ch'); $('#chBtn').hidden=false;
+  if(!show) return;
+  const sc=ch60.score, rec=sc>S.best60&&sc>0; if(rec){ S.best60=sc; save(); }
+  const line = sc===0 ? 'בפעם הבאה זה יבוא' : sc<5 ? 'התחלה טובה' : sc<10 ? 'יפה מאוד!' : sc<15 ? 'אש!' : 'שורקת!';
+  const lv=ch60.lvl?`עלית לרמה ${ch60.lvl} · ${titleOf(ch60.lvl)}`:'';
+  showOver({badge:[rec?'שיא חדש!':'',lv].filter(Boolean).join(' · '), big:sc, title:`אקורדים בדקה · ${line}`, sub:rec?`השיא הקודם נשבר`:`השיא שלך: ${S.best60}`, again:true});
+  fanfare(); if(rec||ch60.lvl) confetti(220);
+}
+
 /* ---------- wiring ---------- */
 function setMode(m){
+  if(ch60.on&&m!=='practice') endChallenge(false);
   mode=m;
   $('#mPractice').setAttribute('aria-pressed',m==='practice');
   $('#mFree').setAttribute('aria-pressed',m==='free');
@@ -1118,6 +1269,10 @@ $('#mFree').onclick=()=>setMode('free');
 $('#mJam').onclick=()=>setMode('jam');
 $('#micBtn').onclick=startMic;
 $('#playBtn').onclick=()=>strum(curShape());
+$('#chBtn').onclick=startChallenge;
+$('#oAgain').onclick=startChallenge;
+$('#oClose').onclick=()=>{ $('#over').hidden=true; };
+$('#over').onclick=e=>{ if(e.target.id==='over') $('#over').hidden=true; };
 $('#skipBtn').onclick=()=>{ streak=0; renderStats();
   if(mode==='family'){ fam.preview=null; fam.step=(fam.step+1)%fam.seq.length; shapeIdx=0; resetRun(); renderFamily(); renderTarget(); } else nextTarget(); };
 $('#tNav').onclick=e=>{ const b=e.target.closest('button'); if(!b) return; const L=getShapes(tgt()); shapeIdx=(shapeIdx+ +b.dataset.d+L.length)%L.length; resetRun(); renderTarget(); };
@@ -1146,7 +1301,7 @@ $('#hold').value=S.hold; $('#hold').oninput=e=>{ S.hold=+e.target.value; save();
 $('#recal').onclick=()=>{ if(running) startCalib(); };
 let resetArm=false;
 $('#reset').onclick=()=>{ if(!resetArm){ resetArm=true; $('#resetConfirm').hidden=false; setTimeout(()=>{ resetArm=false; $('#resetConfirm').hidden=true; },4000); return; }
-  S.done={}; S.points=0; S.level=0; streak=0; save(); $('#resetConfirm').hidden=true; resetArm=false; renderStats(); renderLevels(); setMode('practice'); setTarget('Em'); };
+  S.done={}; S.points=0; S.lvlSeen=1; S.best60=0; S.level=0; streak=0; save(); $('#resetConfirm').hidden=true; resetArm=false; renderStats(); renderLevels(); setMode('practice'); setTarget('Em'); };
 
 if(!CONFIG.levels[S.level]) S.level=0;
 if(!CONFIG.levels[S.level].chords.includes(S.target)) S.target=CONFIG.levels[S.level].chords[0];
